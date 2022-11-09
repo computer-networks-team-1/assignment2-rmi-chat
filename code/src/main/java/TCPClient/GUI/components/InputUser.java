@@ -41,7 +41,11 @@ public class InputUser extends HBox {
 
         if(!input.getText().equals("")) {
             if(input.getText().equals("/quit")){
-                GUIRunner.stop(); //Triggers a disconnection message
+                try {
+                    GUIRunner.stop(); //Triggers a disconnection message
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             } else { //Normal input
                 clientConnection.sendMessage(input.getText());
                 input.setText("");
