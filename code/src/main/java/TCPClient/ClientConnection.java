@@ -15,9 +15,9 @@ public class ClientConnection {
 
     public ClientConnection(String clientName, String ipServer, int portServer) throws Exception {
         a = (ChatInterface) Naming.lookup("rmi://localhost/ABC");
-        a.joinChat(ipServer, portServer, clientName);
+        a.joinChat(ipServer, clientName);
         chatMessages = new ArrayList<>();
-        indexChat = 0;
+        indexChat = -1;
     }
 
     public void sendMessage (String message) {
@@ -30,14 +30,20 @@ public class ClientConnection {
 
     public String getMessage () {
 
+        List<String> newMessagePart = null;
+
         try {
-            chatMessages = a.getChat(indexChat);
+            newMessagePart = a.getChat(indexChat);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
+        if(newMessagePart != null) {
+            chatMessages.addAll(newMessagePart);
+            indexChat = chatMessages.size()-1;
+        }
+
         String message = String.join("\n", chatMessages);
-        indexChat = chatMessages.size();
 
         return message;
     }
