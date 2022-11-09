@@ -9,7 +9,7 @@ public interface ChatInterface extends Remote {
 
     public void joinChat(String ipAddress, String clientName) throws Exception;
 
-    public void leaveChat() throws Exception;
+    public void leaveChat(String ipAddress) throws Exception;
 
     public List<String> getChat(int index) throws Exception;
 

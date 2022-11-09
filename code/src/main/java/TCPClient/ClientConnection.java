@@ -11,10 +11,12 @@ public class ClientConnection {
 
     ChatInterface a;
     List<String> chatMessages;
+    String thisIp;
 
     int indexChat;
 
     public ClientConnection(String clientName, String ipServer, String thisIp) throws Exception {
+        this.thisIp = thisIp;
         a = (ChatInterface) Naming.lookup("rmi://localhost/" + ipServer + "/chat");
         a.joinChat(thisIp, clientName);
         chatMessages = new ArrayList<>();
@@ -44,15 +46,13 @@ public class ClientConnection {
             indexChat = chatMessages.size()-1;
         }
 
-        String message = String.join("\n", chatMessages);
-
-        return message;
+        return String.join("\n", chatMessages);
     }
 
     /**
      * Closes the communication
      */
     public void closeCommunication () throws Exception {
-        a.leaveChat();
+        a.leaveChat(thisIp);
     }
 }
