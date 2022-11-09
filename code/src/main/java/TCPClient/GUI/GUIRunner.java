@@ -30,7 +30,7 @@ public class GUIRunner {
      * @param primaryStage JavaFX primary stage.
      * @throws IOException when graphic.fxml is not found.
      */
-    public static void run(Stage primaryStage) throws IOException {
+    public static void run(Stage primaryStage) throws Exception {
 
         primaryStage.setTitle("TCPClient - Online Chat");
 
@@ -58,7 +58,7 @@ public class GUIRunner {
     }
 
     /** Stops the GUI and the threads. */
-    public static void stop() {
+    public static void stop() throws Exception {
         if(MainView.clientConnection != null)
             MainView.clientConnection.closeCommunication();
         Platform.exit();

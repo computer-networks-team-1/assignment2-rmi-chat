@@ -82,6 +82,8 @@ public class MainView extends VBox {
                 dialog.getEditor().clear(); //Remove input
                 dialog.setHeaderText("An IOException occured! Try again");
                 dialog.setContentText("IP:");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         }
 
