@@ -18,7 +18,13 @@ public class TCPClient extends Application {
     public void start(Stage primaryStage) throws Exception {
         GUIRunner.run(primaryStage);
 
-        primaryStage.setOnCloseRequest(e -> GUIRunner.stop());
+        primaryStage.setOnCloseRequest(e -> {
+            try {
+                GUIRunner.stop();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
 
     public static void main(String[] args) {
