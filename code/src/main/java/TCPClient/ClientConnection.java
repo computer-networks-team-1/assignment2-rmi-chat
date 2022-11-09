@@ -1,6 +1,7 @@
 package TCPClient;
 import TCPServer.ChatInterface;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.rmi.Naming;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class ClientConnection {
 
     public void sendMessage (String message) {
         try {
-            a.sendMessage(message);
+            a.sendMessage(message, InetAddress.getLocalHost().toString());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -20,7 +20,7 @@ public class Chat  extends UnicastRemoteObject implements ChatInterface  {
     }
 
     @Override
-    public void sendMessage(String message) throws Exception {
+    public void sendMessage(String message, String ipClient) throws Exception {
 
     }
 
