@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.Optional;
 
 public class MainView extends VBox {
@@ -39,7 +40,7 @@ public class MainView extends VBox {
         dialog.getEditor().clear(); //Remove input after name has been set
 
         String ipServer = "";
-        dialog.setHeaderText("Choose the IP of the server, you want to connect to");
+        dialog.setHeaderText("Say the IP of the server, you want to connect to");
         dialog.setContentText("IP:");
 
         boolean not_success = true;
@@ -55,27 +56,14 @@ public class MainView extends VBox {
 
 
             int portServer = -1;
-            dialog.setHeaderText("Connection to " + ipServer + ". Which port?");
-            dialog.setContentText("Port:");
-
-            do {
-                Optional<String> result = dialog.showAndWait();
-                if (result.isPresent()) {
-                    try {
-                        portServer = Integer.parseInt(result.get());
-                    } catch (NumberFormatException e) {
-                        portServer = -1;
-                    }
-                } else
-                    throw new IllegalStateException("Port not provided");
-            } while (portServer == -1);
+            dialog.setHeaderText("Connection to " + ipServer );
 
             try {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Connecting");
                 alert.setContentText("Connection is being established...Just confirm and wait.");
                 alert.showAndWait();
-                clientConnection = new ClientConnection(clientName, ipServer, portServer);
+                clientConnection = new ClientConnection(clientName, ipServer, InetAddress.getLocalHost().toString());
 
                 not_success = false;
             } catch (IOException e) {

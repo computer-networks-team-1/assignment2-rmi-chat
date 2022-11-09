@@ -13,9 +13,9 @@ public class ClientConnection {
 
     int indexChat;
 
-    public ClientConnection(String clientName, String ipServer, int portServer) throws Exception {
-        a = (ChatInterface) Naming.lookup("rmi://localhost/ABC");
-        a.joinChat(ipServer, clientName);
+    public ClientConnection(String clientName, String ipServer, String thisIp) throws Exception {
+        a = (ChatInterface) Naming.lookup("rmi://localhost/" + ipServer + "/chat");
+        a.joinChat(thisIp, clientName);
         chatMessages = new ArrayList<>();
         indexChat = -1;
     }
