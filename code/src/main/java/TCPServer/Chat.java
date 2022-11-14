@@ -51,9 +51,7 @@ public class Chat  extends UnicastRemoteObject implements ChatInterface  {
 
     @Override
     public List<String> getChat(int index) throws Exception {
-        System.out.println(messages.subList(index+1, messages.size()));
-        return messages.subList(index+1, messages.size());
-//        return messages;
+        return new ArrayList<>(messages.subList(index+1, messages.size()));
     }
 
     public void recordThisMessage(String ipAddress, String clientName, String message)

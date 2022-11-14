@@ -33,27 +33,19 @@ public class ClientConnection {
 
         List<String> newMessagePart = null;
 
-        System.out.println("sono qui");
-
         try {
-            System.out.println(indexChat);
-            System.out.println(chatInterface.getChat(indexChat));
+//            System.out.println(chatInterface.getChat(indexChat));
             newMessagePart = chatInterface.getChat(indexChat);
-            System.out.println("e' arrivato " + newMessagePart);
+            chatMessages.addAll(newMessagePart);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-//        if(newMessagePart != null || newMessagePart.size() > 0) {
-//            chatMessages.addAll(newMessagePart);
-//            indexChat = chatMessages.size() - 1;
-//        } else
-//            return "";
-//
-//        return String.join("\n", chatMessages);
 
-        if(newMessagePart != null && newMessagePart.size() > 0)
+        if(newMessagePart.size() > 0) {
+            indexChat = chatMessages.size() - 1;
             return String.join("\n", newMessagePart);
+        }
 
         return "";
     }
