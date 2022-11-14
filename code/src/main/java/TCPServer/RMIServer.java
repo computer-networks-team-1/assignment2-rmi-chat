@@ -9,7 +9,7 @@ public class RMIServer {
         try {
             LocateRegistry.createRegistry(7896);
             Chat chat = new Chat();
-            Naming.rebind("rmi://localhost/127.0.0.1/chat", chat);
+            Naming.rebind("rmi://localhost:7896/chat", chat);
             System.out.println("RMI Server is ready");
         } catch(Exception e){
             System.out.println("RMI Server failed: " + e);

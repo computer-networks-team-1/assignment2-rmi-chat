@@ -25,6 +25,8 @@ public class MessageInboxTask extends Task<Void> {
             Thread.sleep(REFRESH_INTERVAL);
             String message = GUIRunner.mainView.clientConnection.getMessage();
 
+
+
             if(!message.equals(""))
                 updateProgress(message);
         }

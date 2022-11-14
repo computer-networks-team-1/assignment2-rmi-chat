@@ -1,15 +1,14 @@
 package TCPClient;
 import TCPServer.ChatInterface;
-import java.io.IOException;
+
 import java.net.InetAddress;
 import java.rmi.Naming;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ClientConnection {
 
-    ChatInterface a;
+    ChatInterface chatInterface;
     List<String> chatMessages;
     String thisIp;
 
@@ -17,15 +16,15 @@ public class ClientConnection {
 
     public ClientConnection(String clientName, String ipServer, String thisIp) throws Exception {
         this.thisIp = thisIp;
-        a = (ChatInterface) Naming.lookup("rmi://localhost/" + ipServer + "/chat");
-        a.joinChat(thisIp, clientName);
+        chatInterface = (ChatInterface) Naming.lookup("rmi://" + ipServer + ":7896/chat");//TODO: make port not hard coded
+        chatInterface.joinChat(thisIp, clientName);
         chatMessages = new ArrayList<>();
         indexChat = -1;
     }
 
     public void sendMessage (String message) {
         try {
-            a.sendMessage(message, InetAddress.getLocalHost().toString());
+            chatInterface.sendMessage(message, InetAddress.getLocalHost().toString());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -35,8 +34,11 @@ public class ClientConnection {
 
         List<String> newMessagePart = null;
 
+        System.out.println("sono qui");
+
         try {
-            newMessagePart = a.getChat(indexChat);
+            newMessagePart = chatInterface.getChat(indexChat);
+            System.out.println("e' arrivato " + newMessagePart);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -53,6 +55,6 @@ public class ClientConnection {
      * Closes the communication
      */
     public void closeCommunication () throws Exception {
-        a.leaveChat(thisIp);
+        chatInterface.leaveChat(thisIp);
     }
 }
