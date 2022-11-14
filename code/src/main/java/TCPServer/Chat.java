@@ -37,8 +37,11 @@ public class Chat  extends UnicastRemoteObject implements ChatInterface  {
     }
 
     @Override
-    public void joinChat(String ipAddress, String clientName) throws Exception {
+    public int joinChat(String ipAddress, String clientName) throws Exception {
         clientsConnected.put(ipAddress, clientName);
+        System.out.println(messages);
+        System.out.println(messages.size() -1);
+        return messages.size()-1;
     }
 
     @Override
@@ -48,7 +51,9 @@ public class Chat  extends UnicastRemoteObject implements ChatInterface  {
 
     @Override
     public List<String> getChat(int index) throws Exception {
+        System.out.println(messages.subList(index+1, messages.size()));
         return messages.subList(index+1, messages.size());
+//        return messages;
     }
 
     public void recordThisMessage(String ipAddress, String clientName, String message)

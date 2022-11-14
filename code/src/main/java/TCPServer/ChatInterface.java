@@ -7,7 +7,7 @@ public interface ChatInterface extends Remote {
 
     public void sendMessage(String message, String s) throws Exception;
 
-    public void joinChat(String ipAddress, String clientName) throws Exception;
+    public int joinChat(String ipAddress, String clientName) throws Exception;
 
     public void leaveChat(String ipAddress) throws Exception;
 

@@ -17,9 +17,8 @@ public class ClientConnection {
     public ClientConnection(String clientName, String ipServer, String thisIp) throws Exception {
         this.thisIp = thisIp;
         chatInterface = (ChatInterface) Naming.lookup("rmi://" + ipServer + ":7896/chat");//TODO: make port not hard coded
-        chatInterface.joinChat(thisIp, clientName);
+        indexChat = chatInterface.joinChat(thisIp, clientName);
         chatMessages = new ArrayList<>();
-        indexChat = -1;
     }
 
     public void sendMessage (String message) {
@@ -37,18 +36,26 @@ public class ClientConnection {
         System.out.println("sono qui");
 
         try {
+            System.out.println(indexChat);
+            System.out.println(chatInterface.getChat(indexChat));
             newMessagePart = chatInterface.getChat(indexChat);
             System.out.println("e' arrivato " + newMessagePart);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        if(newMessagePart != null) {
-            chatMessages.addAll(newMessagePart);
-            indexChat = chatMessages.size()-1;
-        }
+//        if(newMessagePart != null || newMessagePart.size() > 0) {
+//            chatMessages.addAll(newMessagePart);
+//            indexChat = chatMessages.size() - 1;
+//        } else
+//            return "";
+//
+//        return String.join("\n", chatMessages);
 
-        return String.join("\n", chatMessages);
+        if(newMessagePart != null && newMessagePart.size() > 0)
+            return String.join("\n", newMessagePart);
+
+        return "";
     }
 
     /**
