@@ -1,6 +1,7 @@
-package TCPClient.GUI.tasks;
+package RMIClient.GUI.tasks;
 
-import TCPClient.GUI.GUIRunner;
+import RMIClient.GUI.GUIRunner;
+import RMIClient.GUI.views.MainView;
 import javafx.concurrent.Task;
 
 /**
@@ -23,7 +24,7 @@ public class MessageInboxTask extends Task<Void> {
     protected Void call() throws Exception {
         while (true) {
             Thread.sleep(REFRESH_INTERVAL);
-            String message = GUIRunner.mainView.clientConnection.getMessage();
+            String message = MainView.clientConnection.getMessage();
 
             if(!message.equals(""))
                 updateProgress(message);

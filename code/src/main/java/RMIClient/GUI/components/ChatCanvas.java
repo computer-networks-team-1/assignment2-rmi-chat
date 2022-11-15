@@ -1,12 +1,8 @@
-package TCPClient.GUI.components;
+package RMIClient.GUI.components;
 
-import TCPClient.GUI.tasks.MessageInboxTask;
-import javafx.scene.control.ScrollPane;
+import RMIClient.GUI.tasks.MessageInboxTask;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-
-import javax.swing.*;
 
 /**
  * It represents the view of the user to see the chat

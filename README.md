@@ -5,13 +5,13 @@
 Avviare per prima cosa il server eseguendo
 
 ```
-mvn clean compile exec:java@TCPServer 
+mvn clean compile exec:java@RMIServer 
 ```
 
 e dopodichè avviare uno o più client su altri terminali eseguendo
 
 ```
-mvn clean compile exec:java@TCPClientGUI
+mvn clean compile exec:java@RMIClientGUI
 ```
 
 Alternativamente è possibile generare i jar eseguendo

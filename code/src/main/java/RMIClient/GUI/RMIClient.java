@@ -1,11 +1,11 @@
-package TCPClient.GUI;
+package RMIClient.GUI;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 import static javafx.application.Application.launch;
 
-public class TCPClient extends Application {
+public class RMIClient extends Application {
 
     /**
      * Starts the UI process and set the possibility that when the user clicks to close the UI window, also the process
