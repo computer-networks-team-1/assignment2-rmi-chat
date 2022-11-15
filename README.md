@@ -1,4 +1,4 @@
-# Assignment 1 - Online Chat
+# Assignment 2 - RMI Chat
 
 ## Run Commands
 
