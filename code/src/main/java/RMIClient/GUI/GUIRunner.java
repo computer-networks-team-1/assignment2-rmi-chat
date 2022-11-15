@@ -1,22 +1,13 @@
-package TCPClient.GUI;
+package RMIClient.GUI;
 
-import TCPClient.GUI.views.MainView;
-import com.sun.tools.javac.Main;
+import RMIClient.GUI.views.MainView;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class GUIRunner {
 
@@ -32,7 +23,7 @@ public class GUIRunner {
      */
     public static void run(Stage primaryStage) throws Exception {
 
-        primaryStage.setTitle("TCPClient - Online Chat");
+        primaryStage.setTitle("RMIClient - Online Chat");
 
         try {
             mainView = new MainView();

@@ -1,6 +1,6 @@
-package TCPClient.GUI.components;
+package RMIClient.GUI.components;
 
-import TCPClient.GUI.GUIRunner;
+import RMIClient.GUI.GUIRunner;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -8,7 +8,7 @@ import javafx.scene.layout.HBox;
 
 import java.util.Objects;
 
-import static TCPClient.GUI.views.MainView.clientConnection;
+import static RMIClient.GUI.views.MainView.clientConnection;
 
 /**
  * It is the component that allows the user to insert messages and send them
@@ -31,6 +31,13 @@ public class InputUser extends HBox {
         this.getChildren().addAll(input, send);
     }
 
+    private void disconnect() {
+        try {
+            GUIRunner.stop(); //Triggers a disconnection message
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     /**
      * Action linked to the button for sending messages
@@ -41,11 +48,7 @@ public class InputUser extends HBox {
 
         if(!input.getText().equals("")) {
             if(input.getText().equals("/quit")){
-                try {
-                    GUIRunner.stop(); //Triggers a disconnection message
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+                disconnect();
             } else { //Normal input
                 clientConnection.sendMessage(input.getText());
                 input.setText("");

@@ -72,17 +72,17 @@
                 <version>3.0.0</version>
                 <executions>
                     <execution>
-                        <id>TCPServer</id>
+                        <id>RMIServer</id>
                         <configuration>
                             <executable>maven</executable>
-                            <mainClass>TCPServer.TCPServer</mainClass>
+                            <mainClass>RMIServer.RMIServer</mainClass>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>TCPClientGUI</id>
+                        <id>RMIClientGUI</id>
                         <configuration>
                             <executable>maven</executable>
-                            <mainClass>TCPClient.GUI.TCPClient</mainClass>
+                            <mainClass>RMIClient.GUI.RMIClient</mainClass>
                         </configuration>
                     </execution>
                 </executions>
@@ -96,18 +96,18 @@
                 <executions>
                     <!-- Run shade goal on package phase -->
                     <execution>
-                        <id>TCPServer</id>
+                        <id>RMIServer</id>
                         <phase>package</phase>
                         <goals>
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <outputFile>target/TCPServer.jar</outputFile>
+                            <outputFile>target/RMIServer.jar</outputFile>
                             <transformers>
                                 <!-- add Main-Class to manifest file -->
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>TCPServer.TCPServer</mainClass>
+                                    <mainClass>RMIServer.RMIServer</mainClass>
                                 </transformer>
                             </transformers>
                             <createDependencyReducedPom>
@@ -126,18 +126,18 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>TCPClientGUI</id>
+                        <id>RMIClientGUI</id>
                         <phase>package</phase>
                         <goals>
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <outputFile>target/TCPClient.jar</outputFile>
+                            <outputFile>target/RMIClient.jar</outputFile>
                             <transformers>
                                 <!-- add Main-Class to manifest file -->
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>TCPClient.GUI.TCPClient</mainClass>
+                                    <mainClass>RMIClient.GUI.RMIClient</mainClass>
                                 </transformer>
                             </transformers>
                             <createDependencyReducedPom>
