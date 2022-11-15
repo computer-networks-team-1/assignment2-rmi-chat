@@ -14,7 +14,7 @@ public class ClientConnection {
     public ClientConnection(String clientName, String ipServer, String thisIp) throws Exception {
         this.clientName = clientName;
         this.thisIp = thisIp;
-        chatInterface = (ChatInterface) Naming.lookup("rmi://" + ipServer + ":7896/chat");//TODO: make port not hard coded
+        chatInterface = (ChatInterface) Naming.lookup("rmi://" + ipServer + ":7896/chat");
         chatInterface.joinChat(clientName, thisIp);
         indexChat = chatInterface.getCurrentChatIndex();
     }
