@@ -32,7 +32,8 @@ public class MessageInboxTask extends Task<Void> {
     }
 
     /**
-     * It is called by the Task when there is a new message from the server. It updates the view of messages
+     * updates the view of the chat messages. It is called by the Task
+     * when there is a new message from the server.
      *
      * @param v message to add to the view
      */

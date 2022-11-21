@@ -34,11 +34,17 @@ public class MainView extends VBox {
         setUp();
     }
 
+    /**
+     * requests the server IP from the user in a loop until connection has been established successfully.
+     *
+     * @param dialog input dialog for IP address
+     * @param clientName nickname chosen by the client
+     */
     private void connectionLoop(TextInputDialog dialog, String clientName) {
         setDialog(dialog, "Welcome", "Say the IP of the server, you want to connect to", "IP:");
 
         boolean success = false; //connection not established
-        while (!success) { //loop until connection established or program terminated
+        while (!success) {
 
             String ipServer = inputLoop(dialog, "IP Server not provided");
 
@@ -55,6 +61,11 @@ public class MainView extends VBox {
         }
     }
 
+    /**
+     * notifies the user, that the connection is being established which can take a bit of time.
+     *
+     * @param ipServer IP address of the server
+     */
     private void showInformationAlert(String ipServer) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         setDialog(alert, "Connection to " + ipServer,
@@ -63,6 +74,13 @@ public class MainView extends VBox {
         alert.showAndWait();
     }
 
+    /**
+     * asks the user for an input continuously until input is provided.
+     *
+     * @param dialog input dialog
+     * @param exceptionString message to be passed to the exception
+     * @return input string typed by user
+     */
     private String inputLoop(TextInputDialog dialog, String exceptionString) {
         String inputString = "";
         do {
@@ -76,6 +94,14 @@ public class MainView extends VBox {
         return inputString;
     }
 
+    /**
+     * sets head, title and content of a Dialog object.
+     *
+     * @param dialog the dialog pane
+     * @param title the specified title for the dialog
+     * @param header the specified header for the dialog
+     * @param content the specified content for the dialog
+     */
     private void setDialog(Dialog<?> dialog, String title, String header, String content) {
         dialog.setTitle(title);
         dialog.setHeaderText(header);

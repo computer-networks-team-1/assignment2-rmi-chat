@@ -41,6 +41,7 @@ public class InputUser extends HBox {
 
     /**
      * Action linked to the button for sending messages
+     *
      * @param event
      */
     private void sendInput(ActionEvent event) {
