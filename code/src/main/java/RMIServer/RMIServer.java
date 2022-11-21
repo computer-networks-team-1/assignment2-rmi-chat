@@ -6,6 +6,13 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
 public class RMIServer {
+
+    /**
+     * creates a Registry instance that accepts requests on a fixed port,
+     * creates a chat instance and binds a name to it.
+     *
+     * @param args unused
+     */
     public static void main(String[] args) {
         try {
             LocateRegistry.createRegistry(7896);

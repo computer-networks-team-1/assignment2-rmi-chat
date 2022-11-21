@@ -34,13 +34,13 @@ public class Chat  extends UnicastRemoteObject implements ChatInterface  {
     }
 
     @Override
-    public void sendMessage(String message, String clientName) throws Exception {
+    public void sendMessage(String message, String clientName) throws RemoteException {
         messages.add(clientName + ": " + message);
         recordThisMessage(getIpOf(clientName), clientName, message);
     }
 
     @Override
-    public void joinChat(String clientName, String ipAddress) throws Exception {
+    public void joinChat(String clientName, String ipAddress) throws RemoteException {
         clientsConnected.put(clientName, ipAddress);
         messages.add(clientName + " has joined the chat.");
         recordThisMessage(getIpOf(clientName), clientName + " has joined the chat");
@@ -52,23 +52,23 @@ public class Chat  extends UnicastRemoteObject implements ChatInterface  {
     }
 
     @Override
-    public void leaveChat(String clientName) throws Exception {
+    public void leaveChat(String clientName) throws RemoteException {
         messages.add(clientName + " has left the chat");
         recordThisMessage(getIpOf(clientName), clientName + " has left the chat");
         removeClient(clientName);
     }
 
     @Override
-    public List<String> getConversationFromOffset(int offset) throws Exception {
+    public List<String> getConversationFromOffset(int offset) throws RemoteException {
         return new ArrayList<>(messages.subList(offset, messages.size()));
     }
 
-    public void recordThisMessage(String ipAddress, String clientName, String message) {
+    private void recordThisMessage(String ipAddress, String clientName, String message) {
         String textToLog = getTimeString() + " - " + ipAddress + " --> " + clientName + ": " + message;
         writeToLogFile(textToLog);
     }
 
-    public void recordThisMessage(String ipAddress, String message) {
+    private void recordThisMessage(String ipAddress, String message) {
         String textToLog = getTimeString() + " - " + ipAddress + " --> " + message;
         writeToLogFile(textToLog);
     }
@@ -86,6 +86,17 @@ public class Chat  extends UnicastRemoteObject implements ChatInterface  {
         return now.getHour() + ":" + now.getMinute() + ":" + now.getSecond();
     }
 
+    private File getLogFile() throws IOException {
+        String fileName = "src\\main\\resources\\logServer.txt";
+        File logFile = new File(fileName);
+        if (logFile.createNewFile()) {
+            System.out.println("Logfile created: " + logFile.getName());
+        } else {
+            System.out.println("Logfile already exists");
+        }
+        return logFile;
+    }
+
     private void writeToLogFile(String textToLog) {
         try {
             FileWriter fw = new FileWriter(logFile, true);
@@ -98,14 +109,4 @@ public class Chat  extends UnicastRemoteObject implements ChatInterface  {
         }
     }
 
-    private File getLogFile() throws IOException {
-        String fileName = "src\\main\\resources\\logServer.txt";
-        File logFile = new File(fileName);
-        if (logFile.createNewFile()) {
-            System.out.println("Logfile created: " + logFile.getName());
-        } else {
-            System.out.println("Logfile already exists");
-        }
-        return logFile;
-    }
 }

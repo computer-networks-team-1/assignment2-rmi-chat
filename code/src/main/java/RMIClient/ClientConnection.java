@@ -1,6 +1,7 @@
 package RMIClient;
 import RMIServer.ChatInterface;
 import java.rmi.Naming;
+import java.rmi.RemoteException;
 import java.util.List;
 
 public class ClientConnection {
@@ -19,6 +20,11 @@ public class ClientConnection {
         indexChat = chatInterface.getCurrentChatIndex();
     }
 
+    /**
+     * invokes the remote method to send a message.
+     *
+     * @param message message sent by the user
+     */
     public void sendMessage (String message) {
         try {
             chatInterface.sendMessage(message, clientName);
@@ -27,6 +33,12 @@ public class ClientConnection {
         }
     }
 
+    /**
+     * retrieves new messages that were recorded since last invocation and
+     * updates index to the size of the updated chat.
+     *
+     * @return sublist of new messages added since last invocation
+     */
     public String getMessage () {
 
         try {
@@ -41,7 +53,12 @@ public class ClientConnection {
         return "";
     }
 
-    public void closeCommunication () throws Exception {
+    /**
+     * invokes the remote method to leave the chat.
+     *
+     * @throws RemoteException if any exception occurs during remote method call
+     */
+    public void closeCommunication () throws RemoteException {
         chatInterface.leaveChat(clientName);
     }
 }
