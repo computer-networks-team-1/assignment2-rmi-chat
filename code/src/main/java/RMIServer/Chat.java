@@ -63,29 +63,69 @@ public class Chat  extends UnicastRemoteObject implements ChatInterface  {
         return new ArrayList<>(messages.subList(offset, messages.size()));
     }
 
+    /**
+     * saves the message in conjunction with the clients IP address and its name
+     * in the log file which contains all messages sent so far.
+     *
+     * @param ipAddress IP address of client
+     * @param clientName nickname of client
+     * @param message message sent by client
+     */
     private void recordThisMessage(String ipAddress, String clientName, String message) {
         String textToLog = getTimeString() + " - " + ipAddress + " --> " + clientName + ": " + message;
         writeToLogFile(textToLog);
     }
 
+    /**
+     * saves the message in conjunction with the clients IP address but without its name
+     * in the log file which contains all messages sent so far.
+     *
+     * @param ipAddress IP address of client
+     * @param message message sent by client
+     */
     private void recordThisMessage(String ipAddress, String message) {
         String textToLog = getTimeString() + " - " + ipAddress + " --> " + message;
         writeToLogFile(textToLog);
     }
 
+    /**
+     * Lookup IP address of client by nickname.
+     *
+     * Note: Currently new clients with the same nickname overwrite previous
+     * clients.
+     *
+     * @param clientName nickname of client
+     * @return IP address of client
+     */
     private String getIpOf(String clientName) {
         return clientsConnected.get(clientName);
     }
 
+    /**
+     * Remove client from internal representation of clients.
+     * @param clientName nickname of client
+     */
     private void removeClient(String clientName) {
         clientsConnected.remove(clientName);
     }
 
+    /**
+     * returns a string representing the current time point.
+     *
+     * @return current hour, minute and second formatted as single string
+     */
     private String getTimeString() {
         LocalDateTime now = LocalDateTime.now();
         return now.getHour() + ":" + now.getMinute() + ":" + now.getSecond();
     }
 
+    /**
+     * returns a new logfile with specific fixed path if it did not exist.
+     * Otherwise the already existing logfile is returned.
+     *
+     * @return logfile in which chat messages are stored
+     * @throws IOException
+     */
     private File getLogFile() throws IOException {
         String fileName = "src\\main\\resources\\logServer.txt";
         File logFile = new File(fileName);
@@ -97,6 +137,11 @@ public class Chat  extends UnicastRemoteObject implements ChatInterface  {
         return logFile;
     }
 
+    /**
+     * appends a message to the logfile.
+     *
+     * @param textToLog message string to be recorded
+     */
     private void writeToLogFile(String textToLog) {
         try {
             FileWriter fw = new FileWriter(logFile, true);
