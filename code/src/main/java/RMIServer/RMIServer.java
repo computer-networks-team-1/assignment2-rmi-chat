@@ -19,6 +19,7 @@ public class RMIServer {
             Chat chat = new Chat();
             Naming.rebind("rmi://localhost:7896/chat", chat);
             System.out.println("RMI Server is ready");
+            while(true) {} //this line keeps the server on until wanted to
         } catch(IOException e){
             System.out.println("RMI Server failed: " + e);
             e.printStackTrace();
